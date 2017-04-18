@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<style>
+		body,html{
+			margin: 0;
+			padding: 0
+		}
+		ul,li{
+			list-style: none;
+			margin: 0;
+			padding: 0;
+		}
+		#content_box{
+			width: 1000px;
+			margin:0 auto;
+		}
+		.box{
+			width: 100%;
+			overflow: hidden;
+		}
+		.fl{
+			float: left;
+		}
+		.fr{
+			float: right;
+		}
+		.list{
+			width: 100%;
+		}
+		.complete{
+			color: #ccc;
+			text-decoration:line-through;
+		}
+		.edtor{
+			display: none;
+		}
+		.edting .edtor{
+			display: block;
+		}
+		.edting .main_li{
+			display: none;
+		}
+	</style>
+</head>
+<body>
+	<div id="content_box">
+		<h2>添加任务</h2>
+		<input type="text" v-model="curdata" @keyup.13="addList" placeholder="吃饭睡觉打豆豆">
+		<div v-if="!list.length">您还没有添加任何任务</div>
+		<div class="box" v-if="list.length">
+			<div class="fl">{{noSelected}}个文件未完成</div>
+			<div class="fr">
+				<a href="#all">所有任务</a>
+				<a href="#unfinished">未完成的任务</a>
+				<a href="#finished">已完成的任务</a>
+			</div>
+		</div>
+		<h3>任务列表:{{visibility}}</h3>
+		<ul class="list" v-for="(item,index) in filterList">
+			<li :class="{'complete':item.isChecked,'edting':editing===item}">
+			<div class="main_li">
+				<input class="checkbox" type="checkbox" v-model='item.isChecked'>
+				<label @dblclick="edtorList(item)">{{item.title}}</label>
+				<a href="#" @click="deleteList(item)">X</a>
+			</div>
+				<input v-focus="editing===item" class="edtor" type="text" v-model='item.title' @blur="editorEd" @keyup.13="editorEd" @keyup.esc="escEditor(item)">
+				
+			</li>
+		</ul>
+	
+	</div>
+	<script src="vue.min.js"></script>
+	<script src="vue-list.js"></script>
+</body>
+</html>
