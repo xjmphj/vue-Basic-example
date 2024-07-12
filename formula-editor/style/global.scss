@@ -1,0 +1,20 @@
+.formula-dialog.el-dialog {
+  .el-dialog__body {
+    padding-left: 22px;
+    padding-right: 22px;
+  }
+  &.logic {
+    .el-dialog__body {
+      padding-left: var(--padding-4);
+      padding-left: var(--padding-4);
+      padding-top: var(--padding-2);
+    }
+  }
+}
+.formula_disabled_0320 {
+  cursor: not-allowed;
+  opacity: 0.6;
+  .el-tree-node__content {
+    cursor: not-allowed;
+  }
+}
